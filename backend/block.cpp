@@ -20,11 +20,14 @@
  * SOFTWARE.
  *
  ******************************************************************************/
+#define QT_NO_OPENGL_ES_3
+#undef QT_OPENGL_ES_3
 
 #include "block.h"
 
 #include "text.h"
 #include "screen.h"
+
 
 #include <QtQuick/QQuickView>
 #include <QtQuick/QQuickItem>

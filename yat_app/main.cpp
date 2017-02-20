@@ -1,3 +1,6 @@
+#define QT_NO_OPENGL_ES_3
+#undef QT_OPENGL_ES_3
+
 #include <QtCore/QDir>
 #include <QtCore/QLoggingCategory>
 #include <QtGui/QGuiApplication>

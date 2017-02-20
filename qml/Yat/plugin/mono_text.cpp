@@ -20,6 +20,8 @@
 * SOFTWARE.
 *
 ******************************************************************************/
+#define QT_NO_OPENGL_ES_3
+#undef QT_OPENGL_ES_3
 
 #include "mono_text.h"
 

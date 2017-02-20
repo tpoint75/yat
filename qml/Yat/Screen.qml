@@ -22,7 +22,7 @@
 *******************************************************************************/
 
 import QtQuick 2.0
-import QtQuick.Controls 1.1
+//import QtQuick.Controls 1.1
 
 import Yat 1.0 as Yat
 
@@ -32,10 +32,13 @@ Yat.TerminalScreen {
     property font font
     property real fontWidth: fontMetricText.paintedWidth
     property real fontHeight: fontMetricText.paintedHeight
+    function emitKey(keyText, key, modifier) {
+        screen.sendKey(keyText, key, modifier);
+    }
 
-    font.family: screen.platformName != "cocoa" ? "monospace" : "menlo"
+    font.family: screen.platformName != "cocoa" ? "courier" : "menlo"
     anchors.fill: parent
-    focus: true
+//    focus: true
 
     Component {
         id: textComponent
@@ -47,20 +50,20 @@ Yat.TerminalScreen {
         Yat.Cursor {
         }
     }
-    Action {
-        id: copyAction
-        shortcut: "Ctrl+Shift+C"
-        onTriggered: screen.selection.sendToClipboard()
-    }
-    Action {
-        id: paseAction
-        shortcut: "Ctrl+Shift+V"
-        onTriggered: screen.selection.pasteFromClipboard()
-    }
+//    Action {
+//        id: copyAction
+//        shortcut: "Ctrl+Shift+C"
+//        onTriggered: screen.selection.sendToClipboard()
+//    }
+//    Action {
+//        id: paseAction
+//        shortcut: "Ctrl+Shift+V"
+//        onTriggered: screen.selection.pasteFromClipboard()
+//    }
 
     onActiveFocusChanged: {
         if (activeFocus) {
-            Qt.inputMethod.show();
+//            Qt.inputMethod.show();
         }
     }
 
@@ -244,6 +247,10 @@ Yat.TerminalScreen {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton
         onPressed: {
+            keyboard.position = mapToItem(main).y + doku.height
+            keyboard.moveMainView = false
+            keyboard.active++;
+            console.log("pressed!")
             if (mouse.button == Qt.LeftButton) {
                 hoverEnabled = true;
                 var transformed_mouse = mapToItem(textContainer, mouse.x, mouse.y);
