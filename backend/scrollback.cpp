@@ -65,6 +65,16 @@ void Scrollback::addBlock(Block *block)
     m_visible_pages.clear();
 }
 
+void Scrollback::clear()
+{
+    m_blocks.clear();
+    m_block_count = 0;
+    m_height = 0;
+    m_visible_pages.clear();
+    ensureVisiblePages(0);
+}
+
+
 Block *Scrollback::reclaimBlock()
 {
     if (m_blocks.empty())

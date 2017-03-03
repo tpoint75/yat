@@ -45,6 +45,7 @@ public:
     Scrollback(size_t max_size, ScreenData *screen_data);
 
     void addBlock(Block *block);
+    void clear();
     Block *reclaimBlock();
     void ensureVisiblePages(int top_line);
 

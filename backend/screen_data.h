@@ -59,6 +59,7 @@ public:
     void clearToBeginningOfScreen(int y);
     void clearLine(const QPoint &pos);
     void clear();
+    void clearScrollback();
     void releaseTextObjects();
 
     void clearCharacters(const QPoint &pos, int to);

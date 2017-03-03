@@ -227,6 +227,11 @@ void Screen::clearScreen()
     currentScreenData()->clear();
 }
 
+void Screen::resetScreen()
+{
+    currentScreenData()->clearScrollback();
+    sendKey("l",Qt::Key_Return,Qt::ControlModifier);
+}
 
 ColorPalette *Screen::colorPalette() const
 {
@@ -398,13 +403,13 @@ static bool hasMeta(Qt::KeyboardModifiers modifiers)
 
 void Screen::sendKey(const QString &text, Qt::Key key, Qt::KeyboardModifiers modifiers)
 {
-
+//qDebug()<<"sendKey"<<text<<key<<modifiers;
 //    if (key == Qt::Key_Control)
 //        printScreen();
     /// UGH, this function should be re-written
     char escape = '\0';
-    char  control = '\0';
-    char  code = '\0';
+    char control = '\0';
+    char code = '\0';
     QVector<ushort> parameters;
     bool found = true;
 

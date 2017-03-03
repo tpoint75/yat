@@ -156,6 +156,11 @@ void ScreenData::clear()
     }
 }
 
+void ScreenData::clearScrollback()
+{
+    m_scrollback->clear();
+}
+
 void ScreenData::releaseTextObjects()
 {
     for (auto it = m_screen_blocks.begin(); it != m_screen_blocks.end(); ++it) {

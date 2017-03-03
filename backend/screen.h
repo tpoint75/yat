@@ -82,7 +82,8 @@ public:
 
     ColorPalette *colorPalette() const;
 
-    void clearScreen();
+    Q_INVOKABLE void clearScreen();
+    Q_INVOKABLE void resetScreen();
 
     void fill(const QChar character);
     void clear();
