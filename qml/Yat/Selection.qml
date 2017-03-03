@@ -21,7 +21,7 @@
 *
 *******************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.5
 
 Item {
     id: highlightArea
@@ -82,7 +82,7 @@ Item {
 
     function calculateRectangles() {
         highlightArea.y = startY * characterHeight;
-        begginning_rectangle.x = startX * characterWidth;
+        begginning_rectangle.x = startX * characterWidth - characterWidth/2;
         if (startY === endY) {
             middle_rectangle.visible = false;
             end_rectangle.visible = false

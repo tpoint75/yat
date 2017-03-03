@@ -21,7 +21,7 @@
 *
 *******************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.5
 
 import Yat 1.0
 
@@ -55,6 +55,7 @@ ObjectDestructItem {
             latin: objectHandle.latin
 
             onTextChanged: {
+//                console.log("onTextChanged",text)
             }
             SequentialAnimation {
                 running: objectHandle.blinking

@@ -21,7 +21,7 @@
 *
 *******************************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.5
 
 import Yat 1.0
 
@@ -33,35 +33,54 @@ ObjectDestructItem {
 
     height: fontHeight
     width: fontWidth
-    x: objectHandle.x * fontWidth
+    x: objectHandle.x * fontWidth - fontWidth/2
     y: objectHandle.y * fontHeight
     z: 1.1
 
     visible: objectHandle.visible
+    property bool blinking: objectHandle.blinking
+    onVisibleChanged: console.log("CursorVisible",visible)
+    onBlinkingChanged: console.log("CursorBlinking",blinking)
 
-    ShaderEffect {
+//    ShaderEffect {
+//        anchors.fill: parent
+
+//        property variant source: fragmentSource
+
+//        fragmentShader:
+//            "uniform lowp float qt_Opacity;" +
+//            "uniform sampler2D source;" +
+//            "varying highp vec2 qt_TexCoord0;" +
+
+//            "void main() {" +
+//            "   lowp vec4 color = texture2D(source, qt_TexCoord0 ) * qt_Opacity;" +
+//            "   gl_FragColor = vec4(1.0 - color.r, 1.0 - color.g, 1.0 - color.b, color.a);" +
+//            "}"
+
+//        ShaderEffectSource {
+//            id: fragmentSource
+
+//            sourceItem: textContainer
+//            live: true
+
+//            sourceRect: Qt.rect(cursor.x,cursor.y,cursor.width,cursor.height);
+//        }
+//    }
+    Rectangle {
+        id: cursorElement
         anchors.fill: parent
-
-        property variant source: fragmentSource
-
-        fragmentShader:
-            "uniform lowp float qt_Opacity;" +
-            "uniform sampler2D source;" +
-            "varying highp vec2 qt_TexCoord0;" +
-
-            "void main() {" +
-            "   lowp vec4 color = texture2D(source, qt_TexCoord0 ) * qt_Opacity;" +
-            "   gl_FragColor = vec4(1.0 - color.r, 1.0 - color.g, 1.0 - color.b, color.a);" +
-            "}"
-
-        ShaderEffectSource {
-            id: fragmentSource
-
-            sourceItem: textContainer
-            live: true
-
-            sourceRect: Qt.rect(cursor.x,cursor.y,cursor.width,cursor.height);
-        }
+        color: "grey"
+        opacity: 0.8
     }
-}
 
+    SequentialAnimation {
+        id: blinkingAnimation
+        loops: Animation.Infinite
+        onStarted: console.log("CursorBlinkingStarted")
+        PropertyAnimation { target: cursorElement; property: "opacity"; from: 0; to: 0.8; duration: 200; easing.type: Easing.OutQuad}
+        PropertyAnimation { target: cursorElement; property: "opacity"; from: 0.8; to: 0; duration: 500; easing.type: Easing.InCubic}
+
+    }
+
+    Component.onCompleted: blinkingAnimation.start()
+}
